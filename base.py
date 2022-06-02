@@ -1,4 +1,3 @@
-from playsound import playsound
 from urllib.parse import urlparse
 from yt_dlp import YoutubeDL
 from youtubesearchpython import VideosSearch
@@ -53,17 +52,16 @@ def fetch_song(item, force=False):
         print('Using saved version of song:  ', title)
 
 
-def delete_song(name):
-    os.remove(get_song_fp(name))
-
-
-def process_song(item, seperator):
-    separator.separate_to_file(get_song_fp(item), SPLITS_DIR)
+def process_song(item, seperator, force=False):
+    file_path = SPLITS_DIR + get_title(item) + '/'
+    if force or not os.path.exists(file_path):
+        separator.separate_to_file(get_song_fp(item), SPLITS_DIR)
+    else:
+        print('Reusing splits for song:   ', item)
 
 
 if __name__ == '__main__':
     separator = Separator('spleeter:2stems')
-    song = 'gods away on business'
+    song = 'The Sound of Silence (Audio)'
     fetch_song(song)
     process_song(song, separator)
-    #playsound(get_song_fp(song))
