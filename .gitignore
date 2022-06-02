@@ -131,3 +131,5 @@ dmypy.json
 .idea/
 
 *.mp3
+splits/
+pretrained_models/

@@ -5,8 +5,8 @@ from youtubesearchpython import VideosSearch
 from spleeter.separator import Separator
 import os
 
-separator = Separator('spleeter:2stems')
 SONGS_DIR = 'songs/'
+SPLITS_DIR = 'splits/'
 
 
 def is_url(item):
@@ -57,14 +57,13 @@ def delete_song(name):
     os.remove(get_song_fp(name))
 
 
-def process_song(item):
-    print(item)
-    separator.separate_to_file(get_song_fp(item), 'splits/')
+def process_song(item, seperator):
+    separator.separate_to_file(get_song_fp(item), SPLITS_DIR)
 
 
 if __name__ == '__main__':
-    song = 'culture of fear song'
-    print(get_song_fp(song))
-    #fetch_song(song)
-    #process_song(song)
+    separator = Separator('spleeter:2stems')
+    song = 'gods away on business'
+    fetch_song(song)
+    process_song(song, separator)
     #playsound(get_song_fp(song))
